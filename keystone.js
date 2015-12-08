@@ -21,7 +21,7 @@ keystone.init({
 
 	'auto update': true,
 	'mongo': process.env.MONGO_URI || process.env.MONGOLAB_URI || 'mongodb://localhost/keystone-demo',
-	'cloudinary config': 'cloudinary://333779167276662:_8jbSi9FB3sWYrfimcl8VKh34rI@keystone-demo',
+	'cloudinary config': 'cloudinary://576188377986432:7KVbWQhhPnoBx4sCrpClyA5OtEo@failed-team',
 
 	'session': true,
 	'auth': true,

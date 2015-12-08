@@ -7,8 +7,8 @@ module.exports = function (done) {
 			first: 'Demo',
 			last: 'User'
 		},
-		email: 'demo@keystonejs.com',
-		password: 'demo',
+		email: 'phiphamuet@gmail.com',
+		password: 'Hongphi94',
 		isAdmin: true,
 		isProtected: true,
 	})
