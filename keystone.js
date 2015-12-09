@@ -22,7 +22,8 @@ keystone.init({
 	'auto update': true,
 	'mongo': process.env.MONGO_URI || process.env.MONGOLAB_URI || 'mongodb://localhost/keystone-demo',
 	'cloudinary config': 'cloudinary://576188377986432:7KVbWQhhPnoBx4sCrpClyA5OtEo@failed-team',
-
+	//'cloudinary://333779167276662:_8jbSi9FB3sWYrfimcl8VKh34rI@keystone-demo',
+// cloudinary://576188377986432:7KVbWQhhPnoBx4sCrpClyA5OtEo@failed-team
 	'session': true,
 	'auth': true,
 	'user model': 'User',
@@ -52,7 +53,7 @@ keystone.set('locals', {
 keystone.set('routes', require('./routes'));
 
 keystone.set('nav', {
-	'posts': ['posts', 'post-comments', 'post-categories'],
+	'property': ['posts', 'post-comments', 'post-categories'],
 	'galleries': 'galleries',
 	'enquiries': 'enquiries',
 	'users': 'users',

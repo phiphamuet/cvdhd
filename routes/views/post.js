@@ -9,7 +9,7 @@ exports = module.exports = function (req, res) {
 	var locals = res.locals;
 
 	// Init locals
-	locals.section = 'blog';
+	locals.section = 'property';
 	locals.filters = {
 		post: req.params.post,
 	};

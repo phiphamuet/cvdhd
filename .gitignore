@@ -6,7 +6,7 @@ lib-cov
 *.out
 *.pid
 *.gz
-
+.idea/*
 *.min.css
 
 pids
