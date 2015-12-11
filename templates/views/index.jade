@@ -1,59 +1,280 @@
 extends ../layouts/default
-
 block content
-	div(style="padding-left: 5vw; padding-right: 5vw;").jumbotron
-		h1 KeystoneJS Demo
-		.lead This site demonstrates common patterns in <a href='http://keystonejs.com', target='_blank'>KeystoneJS</a>.
-		a(href='http://github.com/keystonejs/keystone-demo', target='_blank', title='View on GitHub').btn.btn-lg.btn-primary View on GitHub
-		a(href='http://www.keystonejs.com/docs', target='_blank', title='KeystoneJS Documentation').btn.btn-lg.btn-link Read the Docs
-			
-	.row
-		.col-sm-8
-			h3: a(href='/blog') Property
-			//- p Simple example blog with posts and categories.
-			p Posts have a key automatically generated from their name, and support short and extended versions of the content.
-			p You can sign in using the demo account to contribute to the blog.
-			hr
-			h3: a(href='/gallery') Gallery
-			p Example of how to set up a page that displays multiple image galleries.
-			p Demonstrates usage of single and multi image fields and their resizing methods.
-			p You can sign in using the demo account to create and manage image galleries, and upload additional images
-			hr
-			h3: a(href='/contact') Enquiries
-			p Simple contact form that validates input and logs enquiries to the database.
-			p You can sign in using the demo account to view the submitted enquiries.
-			hr
-			h3 Generating CSVs
-			p For an example of how to download a list in .csv format, see /routes/download/users.js.
-			p It uses the excellent node-csv library.
-			a(href='/download/users').btn.btn-default Download users.csv
-		.col-sm-4
-			.panel.panel-default
-				.panel-heading
-					h3.panel-title: a(href='/keystone/signin') Admin UI
-				.panel-body
-					p Keystone includes session management and default sign-in and sign-out views.
-					p Sign in with the username <code>demo@keystonejs.com</code> and the password <code>demo</code>
-					if user
-						a(href='/keystone').btn.btn-default Open Admin UI
-						a(href='/keystone/signout').btn.btn-link Sign out
-					else
-						a(href='/keystone/signin').btn.btn-default Sign in
-				
-			.panel.panel-default
-				.panel-heading
-					h3.panel-title: a(href='/404') Error Handling
-				.panel-body
-					p The 404 and 500 views demonstrate how to set up error handlers for your application.
-					a(href='/hey-this-isnt-a-valid-url').btn.btn-default Test it
-	
-	div(style="margin-top: 60px; padding-left: 10vw; padding-right: 10vw;").jumbotron.text-center
-		h2 We'll handle the back end, you handle the front
-		p KeystoneJS isn't opinionated about how you design or build the front-end of your site. Use jQuery, Angular, React.js with LESS, SASS or css-modules and any node.js template language.
-		div We've made this demo site with Bootstrap, Jade and LESS to show how simple it can be to get going, and included some themes from <a href="https://bootswatch.com/?ref=keystonejs" target="_blank">bootswatch</a>. Try them out by selecting below:
-		if themes && themes.length
-			hr(style="margin-bottom: 3em; margin-top: 3em;")
-			ul.nav.nav-pills
-				each theme in themes
-					li(class=currentTheme === theme ? 'active' : '')
-						a(href='/?theme=' + theme)= theme
+    //div(style="padding-left: 5vw; padding-right: 5vw;").jumbotron
+    //	h1 KeystoneJS Demo
+    //	.lead This site demonstrates common patterns in <a href='http://keystonejs.com', target='_blank'>KeystoneJS</a>.
+    //	a(href='http://github.com/keystonejs/keystone-demo', target='_blank', title='View on GitHub').btn.btn-lg.btn-primary View on GitHub
+    //	a(href='http://www.keystonejs.com/docs', target='_blank', title='KeystoneJS Documentation').btn.btn-lg.btn-link Read the Docs
+
+    .main
+        #properties_map-2.widget.widget_properties_map
+            .map-wrapper
+                #map(style="height: 500px; position: relative; overflow: hidden; transform: translateZ(0px); background-color: rgb(229, 227, 223);")
+        .container
+            .sidebar-top
+                #filter_rent_sale_widget-2.widget.widget_filter_rent_sale_widget
+                    .tabs
+                        ul.tabs-navigation
+                            li.rent.active
+                                a(href='#filter_rent_sale_widget-2-rent') For Rent
+                            li.sale
+                                a(href='#filter_rent_sale_widget-2-sale') For Sale
+                            li.link.last
+                                a(href='http://preview.byaviators.com/theme/realia/properties/?filter-sticky=1') TOP
+                            li.link
+                                a(href='http://preview.byaviators.com/theme/realia/properties/?filter-sold=1') Sold
+                            li.link
+                                a(href='http://preview.byaviators.com/theme/realia/properties/?filter-reduced=1') Reduced
+                            li.link
+                                a(href='http://preview.byaviators.com/theme/realia/properties/?filter-featured=1') Featured
+                            li.link
+                                a(href='http://preview.byaviators.com/theme/realia/properties/') All properties
+                        .tabs-content
+                            #filter_rent_sale_widget-2-rent.tab-content.rent-tab.active
+                                form(method='get', action='http://preview.byaviators.com/theme/realia/properties/')
+                                    input(type='hidden', name='filter-contract', value='RENT')
+                                    .form-group
+                                        select#rent_filter_rent_sale_widget-2_location.form-control(name='filter-location')
+                                            option(value='')
+                                                | Location
+                                            option(value='40') New York City
+                                            option(value='51')
+                                                | »  Brooklyn
+                                            option(value='52')
+                                                | »  Manhattan
+                                            option(value='42')
+                                                | »  Queens
+                                            option(value='46')
+                                                | »  Staten Island
+                                            option(value='48')
+                                                | »  The Bronx
+                                    // /.form-group
+                                    .form-group
+                                        select#rent_filter_rent_sale_widget-2_property_type.form-control(name='filter-property-type')
+                                            option(value='')
+                                                | Property type
+                                            option(value='13')
+                                                | Apartment
+                                            option(value='19')
+                                                | Building area
+                                            option(value='24')
+                                                | Condo
+                                            option(value='34')
+                                                | House
+                                            option(value='49')
+                                                | Villa
+                                    // /.form-group
+                                    .form-group
+                                        input#rent_filter_rent_sale_widget-2_price_from.form-control(type='text', name='filter-price-from', placeholder='Price from', value='')
+                                    // /.form-group
+                                    .form-group
+                                        input#rent_filter_rent_sale_widget-2_price_to.form-control(type='text', name='filter-price-to', placeholder='Price to', value='')
+                                    // /.form-group
+                                    .form-group
+                                        button.button Filter
+                                    // /.form-group
+                            #filter_rent_sale_widget-2-sale.tab-content.sale-tab
+                                form(method='get', action='http://preview.byaviators.com/theme/realia/properties/')
+                                    input(type='hidden', name='filter-contract', value='SALE')
+                                    .form-group
+                                        select#sale_filter_rent_sale_widget-2_status.form-control(name='filter-status')
+                                            option(value='')
+                                                | Status
+                                            option(value='14') Available
+                                            option(value='43') Rent Agreed
+                                            option(value='44') Reserved
+                                            option(value='45') Sell Agreed
+                                    // /.form-group
+                                    .form-group
+                                        select#sale_filter_rent_sale_widget-2_status.form-control(name='filter-contract')
+                                            option(value='') All contracts
+                                            option(value='SALE') Sale
+                                            option(value='RENT') Rent
+                                    // /.form-group
+                                    .form-group
+                                        input#sale_filter_rent_sale_widget-2_price_from.form-control(type='text', name='filter-price-from', placeholder='Price from', value='')
+                                    // /.form-group
+                                    .form-group
+                                        input#sale_filter_rent_sale_widget-2_price_to.form-control(type='text', name='filter-price-to', placeholder='Price to', value='')
+                                    // /.form-group
+                                    .form-group
+                                        button.button Filter
+                                    // /.form-group
+            // /.sidebar
+            .row
+                .content.col-sm-8.col-md-9
+                    article#post-268.post-268.page.type-page.status-publish.hentry
+                        header.entry-header.page-header
+                            h1 Recent Properties
+                        // .entry-header
+                        .entry-content
+                            .row
+                                .col-sm-8
+                        // .entry-content
+                    // #post-##
+                    #properties_widget-3.widget.widget_properties_widget
+                        .type-box.item-per-row-3
+                            .properties-row
+                                .property-container
+                                    .property-box
+                                        .property-box-image
+                                            a.property-box-image-inner(href='http://preview.byaviators.com/theme/realia/properties/south-mervin-boulevard/')
+                                                img.attachment-property-box-thumbnail.wp-post-image(width='270', height='226', src='http://preview.byaviators.com/theme/realia/wp-content/uploads/2015/06/5388662544_96ca3f71c1_o-270x226.jpg', alt='interiors')
+                                                .property-box-image-price
+                                                    | $ 220,000
+                                                // /.property-box-image-price
+                                                span.property-badge Featured / Reduced
+                                                span.property-badge.property-badge-sticky TOP
+                                        // /.property-image
+                                        .property-box-content
+                                            .property-box-title
+                                                h3
+                                                    a(href='http://preview.byaviators.com/theme/realia/properties/south-mervin-boulevard/') South Mervin Boulevard
+                                            // /.property-box-title
+                                            .property-box-body
+                                                .property-box-type
+                                                    | Villa
+                                                // /.property-box-type
+                                                .property-box-price
+                                                    | $ 220,000
+                                                // /.property-box-price
+                                                .property-box-read-more
+                                                    a(href='http://preview.byaviators.com/theme/realia/properties/south-mervin-boulevard/') Read More
+                                                // /.property-box-price
+                                                .property-box-meta
+                                                    span.property-box-meta-item.property-box-meta-item-area
+                                                        i.pp.pp-normal-cursor-scale-up
+                                                        |  140 sqft
+                                                    // /.property-box-meta-item
+                                                    span.property-box-meta-item.property-box-meta-item-beds
+                                                        i.pp.pp-normal-bed
+                                                        |  3
+                                                    // /.property-box-meta-item
+                                                    span.property-box-meta-item.property-box-meta-item-baths
+                                                        i.pp.pp-normal-shower
+                                                        |  4
+                                                    // /.property-box-meta-item
+                                                // /.property-box-meta
+                                            // /.property-box-body
+                                        // /.property-box-content
+                                // /.property-container
+                            .properties-row
+                                .property-container
+                                    .property-box
+                                        .property-box-image
+                                            a.property-box-image-inner(href='http://preview.byaviators.com/theme/realia/properties/south-celler-court/')
+                                                img.attachment-property-box-thumbnail.wp-post-image(width='270', height='226', src='http://preview.byaviators.com/theme/realia/wp-content/uploads/2015/06/5388655270_3a8c3c8799_o-270x226.jpg', alt='interiors')
+                                                .property-box-image-price
+                                                    | $ 225,000
+                                                // /.property-box-image-price
+                                        // /.property-image
+                                        .property-box-content
+                                            .property-box-title
+                                                h3
+                                                    a(href='http://preview.byaviators.com/theme/realia/properties/south-celler-court/') South Celler Court
+                                            // /.property-box-title
+                                            .property-box-body
+                                                .property-box-type
+                                                    | Building area
+                                                // /.property-box-type
+                                                .property-box-price
+                                                    | $ 225,000
+                                                // /.property-box-price
+                                                .property-box-read-more
+                                                    a(href='http://preview.byaviators.com/theme/realia/properties/south-celler-court/') Read More
+                                                // /.property-box-price
+                                                .property-box-meta
+                                                    span.property-box-meta-item.property-box-meta-item-area
+                                                        i.pp.pp-normal-cursor-scale-up
+                                                        |  160 sqft
+                                                    // /.property-box-meta-item
+                                                    span.property-box-meta-item.property-box-meta-item-beds
+                                                        i.pp.pp-normal-bed
+                                                        |  4
+                                                    // /.property-box-meta-item
+                                                    span.property-box-meta-item.property-box-meta-item-baths
+                                                        i.pp.pp-normal-shower
+                                                        |  5
+                                                    // /.property-box-meta-item
+                                                // /.property-box-meta
+                                            // /.property-box-body
+                                        // /.property-box-content
+                                // /.property-container
+
+                // /.content
+                .sidebar.col-sm-4.col-md-3
+                    #agents_widget-2.widget.widget_agents_widget
+                        h2.widgettitle    Agents
+                        .type-small.item-per-row-1
+                            .agents-container
+                                .agent-small
+                                    .agent-small-inner
+                                        .agent-small-image
+                                            a.agent-small-image-inner(href='http://preview.byaviators.com/theme/realia/agents/andrew-man/')
+                                                img.attachment-thumbnail.wp-post-image(width='150', height='150', src='http://preview.byaviators.com/theme/realia/wp-content/uploads/2015/06/7446746056_f0d422d0b4_o-e1434118870928-150x150.jpg', alt='ISO bestuur 2012-2013')
+                                            // /.agent-small-image-inner
+                                        // /.agent-small-image
+                                        .agent-small-content
+                                            h3.agent-small-title
+                                                a(href='http://preview.byaviators.com/theme/realia/agents/andrew-man/') Andrew Man
+                                            .agent-small-email
+                                                a(href='mailto:info@example.com>') info@example.com
+                                            // /.agent-small-email
+                                            .agent-small-phone
+                                                | +123-456-789
+                                            // /.agent-small-phone
+                                        // /.agent-small-content
+                                    // /.agent-small-inner
+                                // /.agent-small
+                    #properties_widget-2.widget.widget_properties_widget
+                        h2.widgettitle    Properties
+                        .type-small.item-per-row-1
+                            .property-container
+                                .property-small
+                                    .property-small-image
+                                        a(href='http://preview.byaviators.com/theme/realia/properties/south-mervin-boulevard/')
+                                            img.attachment-thumbnail.wp-post-image(width='150', height='150', src='http://preview.byaviators.com/theme/realia/wp-content/uploads/2015/06/5388662544_96ca3f71c1_o-150x150.jpg', alt='interiors')
+                                    // /.property-small-image
+                                    .property-small-content
+                                        .property-small-type
+                                            | Villa
+                                        // /.property-small-type
+                                        h3.property-small-title
+                                            a(href='http://preview.byaviators.com/theme/realia/properties/south-mervin-boulevard/') South Mervin Boulevard
+                                        // /.property-small-title
+                                        .property-small-price
+                                            | $ 220,000
+                                        // /.property-small-price
+                                    // /.property-small-content
+                                // /.property-small
+                            // /.property-container
+                // /.sidebar
+            // /.row
+            #aviators_call_to_action-2.widget.widget_aviators_call_to_action
+                .fullwidth.background-secondary
+                    .row
+                        .call-to-action-text.col-sm-12.col-md-9
+                            | Powered by real estate
+                            b Realia
+                            |  plugin
+                        .col-sm-12.col-md-3
+                            a.btn.btn-primary(href='')
+                                | Contact
+                    // /.row
+                // /.fullwidth
+        // /.container
+
+    script( async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDnR2bXv74j6x24zMnPoSLrdI2EyTPPt4g", type="text/javascript")
+    //script(src='http://maps.googleapis.com/maps/api/js')
+    script.
+        function initialize() {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                var mapProp = {
+                    center: new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
+                    zoom: 14,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                };
+                var map = new google.maps.Map(document.getElementById("map"), mapProp);
+            });
+        }
+        google.maps.event.addDomListener(window, 'load', initialize);

@@ -23,6 +23,7 @@ exports = module.exports = function (req, res) {
 		}).populate('author categories');
 
 		q.exec(function (err, result) {
+			console.log(result);
 			locals.post = result;
 			next(err);
 		});
@@ -35,6 +36,7 @@ exports = module.exports = function (req, res) {
 		var q = Post.model.find().where('state', 'published').sort('-publishedDate').populate('author').limit('4');
 
 		q.exec(function (err, results) {
+			console.log(results);
 			locals.posts = results;
 			next(err);
 		});
@@ -78,7 +80,7 @@ exports = module.exports = function (req, res) {
 				validationErrors = err.errors;
 			} else {
 				req.flash('success', 'Your comment was added.');
-				return res.redirect('/blog/post/' + locals.post.key + '#comment-id-' + newComment.id);
+				return res.redirect('/property/post/' + locals.post.key + '#comment-id-' + newComment.id);
 			}
 			next();
 		});
@@ -117,7 +119,7 @@ exports = module.exports = function (req, res) {
 				comment.save(function (err) {
 					if (err) return res.err(err);
 					req.flash('success', 'Your comment has been deleted.');
-					return res.redirect('/blog/post/' + locals.post.key);
+					return res.redirect('/property/post/' + locals.post.key);
 				});
 			});
 	});
