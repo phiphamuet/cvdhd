@@ -4,6 +4,61 @@ include ../mixins/commenting
 include ../mixins/post
 
 block content
+    style.
+        *, *:before, *:after {
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            color: #384047;
+        }
+
+        table {
+            max-width: 960px;
+            margin: 10px auto;
+        }
+
+        caption {
+            font-size: 1.6em;
+            font-weight: 400;
+            padding: 10px 0;
+        }
+
+        thead th {
+            font-weight: 400;
+            background: #8a97a0;
+            color: #FFF;
+        }
+
+        tr {
+            background: #f4f7f8;
+            border-bottom: 1px solid #FFF;
+            margin-bottom: 5px;
+        }
+
+        tr:nth-child(even) {
+            background: #e8eeef;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 20px;
+            font-weight: 300;
+        }
+
+        tfoot tr {
+            background: none;
+        }
+
+        tfoot td {
+            padding: 10px 2px;
+            font-size: 0.8em;
+            font-style: italic;
+            color: #8a97a0;
+        }
 
     if !post
         .jumbotron.text-center
@@ -19,8 +74,8 @@ block content
                 article
                     if post.image[0]
                         div#Image(style="margin-bottom: 20px; margin-top: 20px;")
-                        img(src=post.image[0].thumbnail(200, 200))
-                        img(src=post.image[1].thumbnail(200, 200))
+                        //img(src=post.image[0].thumbnail(200, 200))
+                        //img(src=post.image[1].thumbnail(200, 200))
                     div
                         p.text-muted.text-small Posted
                             if post.publishedDate
@@ -42,13 +97,34 @@ block content
                 div
                     +comment-form()
                     +comment-thread(comments)
-            .col-md-2
-                p Info Property
-                    .row
-                        table
-                            tr
-                                td.col-md-6 Price
-                                td.col-md-6 100000$
+            .col-md-4
+
+                .row
+                    table()
+                        tr
+                            th(colspan="2", style="text-align: center") Thông tin
+                        tr
+                            td.col-md-6 Giá/mét vuông
+                            td.col-md-6
+                                if !post.price
+                                    | Chưa rõ
+                                else
+                                    | #{post.price} vnđ
+                        tr
+                            td.col-md-6 Số phòng
+                                td.col-md-6
+                                    if !post.room
+                                        | Chưa rõ số phòng
+                                    else
+                                        | #{post.room} phòng
+                        tr
+                            td.col-md-6 Diện tích
+                                td.col-md-6
+                                    if !post.area
+                                        | Chưa rõ diện tích
+                                    else
+                                        | #{post.area} mét vuông
+
     script(src='//cdnjs.cloudflare.com/ajax/libs/three.js/r69/three.min.js')
     script.
         THREE.ImageUtils.crossOrigin = '';
@@ -60,7 +136,7 @@ block content
         var savedLongitude;
         var savedLatitude;
         // panoramas background
-        var panoramasArray = ["#{post.image[0].fit()}","#{post.image[1].fit()}"];
+        var panoramasArray = ["#{post.image[0].fit()}"];
         var panoramaNumber = 0;
         // setting up the renderer
         renderer = new THREE.WebGLRenderer();
@@ -127,7 +203,6 @@ block content
             panoramaNumber = (panoramaNumber + 1) % panoramasArray.length
             sphereMaterial.map = THREE.ImageUtils.loadTexture(panoramasArray[panoramaNumber])
         }
-
 block page-js
     script.
         jQuery(function ($) {

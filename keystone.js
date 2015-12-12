@@ -9,8 +9,8 @@ var keystone = require('keystone');
 
 keystone.init({
 
-	'name': 'Keystone Demo',
-	'brand': 'Demo',
+	'name': 'Property',
+	'brand': 'Property CP',
 
 	'favicon': 'public/favicon.ico',
 	'less': 'public',

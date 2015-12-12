@@ -3,6 +3,7 @@ var Types = keystone.Field.Types;
 
 var Post = new keystone.List('Post', {
 	autokey: { from: 'name', path: 'key', unique: true },
+	drilldown: 'author'
 });
 
 Post.add({
@@ -11,6 +12,10 @@ Post.add({
 	author: { type: Types.Relationship, ref: 'User', index: true },
 	publishedDate: { type: Types.Date, index: true },
 	image: { type: Types.CloudinaryImages },
+	price: {type: Number},
+	room : { type: Number},
+	area: { type: Number},
+	location: {type: String},
 	content: {
 		brief: { type: Types.Html, wysiwyg: true, height: 150 },
 		extended: { type: Types.Html, wysiwyg: true, height: 400 },

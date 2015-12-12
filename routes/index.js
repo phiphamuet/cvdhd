@@ -34,7 +34,7 @@ exports = module.exports = function (app) {
 	app.all('/property/post/:post', routes.views.post);
 	app.get('/gallery', routes.views.gallery);
 	app.all('/contact', routes.views.contact);
-
+	app.all('/signup', routes.views.signup);
 	// Downloads
 	app.get('/download/users', routes.download.users);
 

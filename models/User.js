@@ -14,6 +14,8 @@ User.add({
 	password: { type: Types.Password, initial: true, required: false },
 }, 'Permissions', {
 	isProtected: { type: Boolean, noedit: true, hidden: true },
+    admin: { type: Boolean, noedit: true, hidden: false},
+    user: {type:Boolean, noedit: false, hidden: false}
 });
 
 // Provide access to Keystone

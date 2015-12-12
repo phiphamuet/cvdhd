@@ -2,7 +2,7 @@ mixin post(post)
     article(data-ks-editable=editable(user, {list: 'Post', id: post.id})).media
         .media-left
             a(href='/property/post/' + post.key)
-                if post.image[0]
+                if post.image
                     img(src=post.image[0].thumbnail(200, 200, "scale")).media-object
                 else
                     img(src="http://placehold.it/80x80").media-object
