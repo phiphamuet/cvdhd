@@ -239,7 +239,23 @@ block content
     script.
 
         var gmap;
-
+        var posts =!{JSON.stringify(posts)};
+        posts=posts.map(function(value){
+            var temp= {};
+            temp.lat = value.lat;
+            temp.long = value.long;
+            temp.id = value.key;
+            temp.type = 'family-house';
+            temp.area = value.area;
+            temp.price = value.price;
+            if(value.image.length ==0){
+                temp.image = 'http://preview.byaviators.com/drupal/realia/sites/default/files/styles/thumbnail/public/14_5.jpg?itok=ZoE8CZZz'
+            } else {
+                temp.image = value.image[0].url;
+            }
+            return temp;
+        })
+        console.log(posts);
         function Marker(lat, lng, post){
             this.lat = lat;
             this.lng = lng;
@@ -255,33 +271,28 @@ block content
 
         google.maps.event.addDomListener(window, 'load', function(){
             initMap();
-
+            posts.forEach(function(value){
+                addMarkersToMap([new Marker(value.lat, value.long, value)]);
+            })
             //Demo, load by AJAX later
-            addMarkersToMap([
-                new Marker(21.038, 105.788),
-                new Marker(21.030, 105.795),
-                new Marker(21.044, 105.787),
-                new Marker(21.039, 105.773),
-                new Marker(21.027, 105.774)
-            ]);
         });
 
         function initMap(){
             gmap = new google.maps.Map(document.getElementById('map'), {
-                center: {lat: 21.0290715, lng: 105.8205887},
+                center: {lat: 21.0290715, lng: 105.78},
                 zoom: 14,
                 scrollwheel: false,
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             });
 
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function(position) {
+            if (!navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (position) {
                     gmap.setCenter({
                         lat: position.coords.latitude,
                         lng: position.coords.longitude
                     });
                 });
-            } 
+            }
         }
 
         function addMarkersToMap(markers){
@@ -366,6 +377,6 @@ block content
                 });
 
             });
-            
+
         }
         
