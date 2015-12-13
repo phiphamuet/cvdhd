@@ -16,6 +16,7 @@ Post.add({
 	room : { type: Number},
 	area: { type: Number},
 	location: {type: String},
+	unit: {type: String},
 	content: {
 		brief: { type: Types.Html, wysiwyg: true, height: 150 },
 		extended: { type: Types.Html, wysiwyg: true, height: 400 },

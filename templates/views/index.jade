@@ -1,4 +1,5 @@
 extends ../layouts/default
+include ../mixins/post
 block content
     //div(style="padding-left: 5vw; padding-right: 5vw;").jumbotron
     //	h1 KeystoneJS Demo
@@ -9,60 +10,28 @@ block content
     .main
         #properties_map-2.widget.widget_properties_map
             .map-wrapper
-                #map(style="height: 500px; position: relative; overflow: hidden; transform: translateZ(0px); background-color: rgb(229, 227, 223);")
+                //#map(style="height: 500px; position: relative; overflow: hidden; transform: translateZ(0px); background-color: rgb(229, 227, 223);")
         .container
             .sidebar-top
                 #filter_rent_sale_widget-2.widget.widget_filter_rent_sale_widget
                     .tabs
                         ul.tabs-navigation
-                            li.rent.active
-                                a(href='#filter_rent_sale_widget-2-rent') For Rent
-                            li.sale
-                                a(href='#filter_rent_sale_widget-2-sale') For Sale
-                            li.link.last
-                                a(href='http://preview.byaviators.com/theme/realia/properties/?filter-sticky=1') TOP
-                            li.link
-                                a(href='http://preview.byaviators.com/theme/realia/properties/?filter-sold=1') Sold
-                            li.link
-                                a(href='http://preview.byaviators.com/theme/realia/properties/?filter-reduced=1') Reduced
-                            li.link
-                                a(href='http://preview.byaviators.com/theme/realia/properties/?filter-featured=1') Featured
-                            li.link
-                                a(href='http://preview.byaviators.com/theme/realia/properties/') All properties
+                            li.active
+                                a(href='#filter_rent_sale_widget-2-rent') Search
                         .tabs-content
                             #filter_rent_sale_widget-2-rent.tab-content.rent-tab.active
-                                form(method='get', action='http://preview.byaviators.com/theme/realia/properties/')
+                                form(method='get', action='filter/properties')
                                     input(type='hidden', name='filter-contract', value='RENT')
                                     .form-group
                                         select#rent_filter_rent_sale_widget-2_location.form-control(name='filter-location')
                                             option(value='')
                                                 | Location
-                                            option(value='40') New York City
-                                            option(value='51')
-                                                | »  Brooklyn
-                                            option(value='52')
-                                                | »  Manhattan
-                                            option(value='42')
-                                                | »  Queens
-                                            option(value='46')
-                                                | »  Staten Island
-                                            option(value='48')
-                                                | »  The Bronx
                                     // /.form-group
                                     .form-group
                                         select#rent_filter_rent_sale_widget-2_property_type.form-control(name='filter-property-type')
                                             option(value='')
                                                 | Property type
-                                            option(value='13')
-                                                | Apartment
-                                            option(value='19')
-                                                | Building area
-                                            option(value='24')
-                                                | Condo
-                                            option(value='34')
-                                                | House
-                                            option(value='49')
-                                                | Villa
+
                                     // /.form-group
                                     .form-group
                                         input#rent_filter_rent_sale_widget-2_price_from.form-control(type='text', name='filter-price-from', placeholder='Price from', value='')
@@ -102,7 +71,7 @@ block content
                                     // /.form-group
             // /.sidebar
             .row
-                .content.col-sm-8.col-md-9
+                .content.col-sm-12.col-md-12
                     article#post-268.post-268.page.type-page.status-publish.hentry
                         header.entry-header.page-header
                             h1 Recent Properties
@@ -112,144 +81,86 @@ block content
                                 .col-sm-8
                         // .entry-content
                     // #post-##
-                    #properties_widget-3.widget.widget_properties_widget
-                        .type-box.item-per-row-3
-                            .properties-row
-                                .property-container
-                                    .property-box
-                                        .property-box-image
-                                            a.property-box-image-inner(href='http://preview.byaviators.com/theme/realia/properties/south-mervin-boulevard/')
-                                                img.attachment-property-box-thumbnail.wp-post-image(width='270', height='226', src='http://preview.byaviators.com/theme/realia/wp-content/uploads/2015/06/5388662544_96ca3f71c1_o-270x226.jpg', alt='interiors')
-                                                .property-box-image-price
-                                                    | $ 220,000
-                                                // /.property-box-image-price
-                                                span.property-badge Featured / Reduced
-                                                span.property-badge.property-badge-sticky TOP
-                                        // /.property-image
-                                        .property-box-content
-                                            .property-box-title
-                                                h3
-                                                    a(href='http://preview.byaviators.com/theme/realia/properties/south-mervin-boulevard/') South Mervin Boulevard
-                                            // /.property-box-title
-                                            .property-box-body
-                                                .property-box-type
-                                                    | Villa
-                                                // /.property-box-type
-                                                .property-box-price
-                                                    | $ 220,000
-                                                // /.property-box-price
-                                                .property-box-read-more
-                                                    a(href='http://preview.byaviators.com/theme/realia/properties/south-mervin-boulevard/') Read More
-                                                // /.property-box-price
-                                                .property-box-meta
-                                                    span.property-box-meta-item.property-box-meta-item-area
-                                                        i.pp.pp-normal-cursor-scale-up
-                                                        |  140 sqft
-                                                    // /.property-box-meta-item
-                                                    span.property-box-meta-item.property-box-meta-item-beds
-                                                        i.pp.pp-normal-bed
-                                                        |  3
-                                                    // /.property-box-meta-item
-                                                    span.property-box-meta-item.property-box-meta-item-baths
-                                                        i.pp.pp-normal-shower
-                                                        |  4
-                                                    // /.property-box-meta-item
-                                                // /.property-box-meta
-                                            // /.property-box-body
-                                        // /.property-box-content
-                                // /.property-container
-                            .properties-row
-                                .property-container
-                                    .property-box
-                                        .property-box-image
-                                            a.property-box-image-inner(href='http://preview.byaviators.com/theme/realia/properties/south-celler-court/')
-                                                img.attachment-property-box-thumbnail.wp-post-image(width='270', height='226', src='http://preview.byaviators.com/theme/realia/wp-content/uploads/2015/06/5388655270_3a8c3c8799_o-270x226.jpg', alt='interiors')
-                                                .property-box-image-price
-                                                    | $ 225,000
-                                                // /.property-box-image-price
-                                        // /.property-image
-                                        .property-box-content
-                                            .property-box-title
-                                                h3
-                                                    a(href='http://preview.byaviators.com/theme/realia/properties/south-celler-court/') South Celler Court
-                                            // /.property-box-title
-                                            .property-box-body
-                                                .property-box-type
-                                                    | Building area
-                                                // /.property-box-type
-                                                .property-box-price
-                                                    | $ 225,000
-                                                // /.property-box-price
-                                                .property-box-read-more
-                                                    a(href='http://preview.byaviators.com/theme/realia/properties/south-celler-court/') Read More
-                                                // /.property-box-price
-                                                .property-box-meta
-                                                    span.property-box-meta-item.property-box-meta-item-area
-                                                        i.pp.pp-normal-cursor-scale-up
-                                                        |  160 sqft
-                                                    // /.property-box-meta-item
-                                                    span.property-box-meta-item.property-box-meta-item-beds
-                                                        i.pp.pp-normal-bed
-                                                        |  4
-                                                    // /.property-box-meta-item
-                                                    span.property-box-meta-item.property-box-meta-item-baths
-                                                        i.pp.pp-normal-shower
-                                                        |  5
-                                                    // /.property-box-meta-item
-                                                // /.property-box-meta
-                                            // /.property-box-body
-                                        // /.property-box-content
-                                // /.property-container
-
-                // /.content
-                .sidebar.col-sm-4.col-md-3
-                    #agents_widget-2.widget.widget_agents_widget
-                        h2.widgettitle    Agents
-                        .type-small.item-per-row-1
-                            .agents-container
-                                .agent-small
-                                    .agent-small-inner
-                                        .agent-small-image
-                                            a.agent-small-image-inner(href='http://preview.byaviators.com/theme/realia/agents/andrew-man/')
-                                                img.attachment-thumbnail.wp-post-image(width='150', height='150', src='http://preview.byaviators.com/theme/realia/wp-content/uploads/2015/06/7446746056_f0d422d0b4_o-e1434118870928-150x150.jpg', alt='ISO bestuur 2012-2013')
-                                            // /.agent-small-image-inner
-                                        // /.agent-small-image
-                                        .agent-small-content
-                                            h3.agent-small-title
-                                                a(href='http://preview.byaviators.com/theme/realia/agents/andrew-man/') Andrew Man
-                                            .agent-small-email
-                                                a(href='mailto:info@example.com>') info@example.com
-                                            // /.agent-small-email
-                                            .agent-small-phone
-                                                | +123-456-789
-                                            // /.agent-small-phone
-                                        // /.agent-small-content
-                                    // /.agent-small-inner
-                                // /.agent-small
-                    #properties_widget-2.widget.widget_properties_widget
-                        h2.widgettitle    Properties
-                        .type-small.item-per-row-1
-                            .property-container
-                                .property-small
-                                    .property-small-image
-                                        a(href='http://preview.byaviators.com/theme/realia/properties/south-mervin-boulevard/')
-                                            img.attachment-thumbnail.wp-post-image(width='150', height='150', src='http://preview.byaviators.com/theme/realia/wp-content/uploads/2015/06/5388662544_96ca3f71c1_o-150x150.jpg', alt='interiors')
-                                    // /.property-small-image
-                                    .property-small-content
-                                        .property-small-type
-                                            | Villa
-                                        // /.property-small-type
-                                        h3.property-small-title
-                                            a(href='http://preview.byaviators.com/theme/realia/properties/south-mervin-boulevard/') South Mervin Boulevard
-                                        // /.property-small-title
-                                        .property-small-price
-                                            | $ 220,000
-                                        // /.property-small-price
-                                    // /.property-small-content
-                                // /.property-small
-                            // /.property-container
-                // /.sidebar
-            // /.row
+                    if posts.length
+                        if posts.totalPages > 1
+                            .lead.text-muted Showing
+                                strong #{posts.first}
+                                |  to
+                                strong #{posts.last}
+                                |  of
+                                strong #{posts.total}
+                                |  posts
+                        else
+                            .lead.text-muted Showing #{utils.plural(posts.length, '* post')}
+                        .blog
+                            each post in posts
+                                +post(post)
+                        if posts.totalPages > 1
+                            ul.pagination
+                                if posts.previous
+                                    li: a(href='?page=' + posts.previous): span.glyphicon.glyphicon-chevron-left
+                                else
+                                    li.disabled: a(href='?page=' + 1): span.glyphicon.glyphicon-chevron-left
+                                each p, i in posts.pages
+                                    li(class=posts.currentPage === p ? 'active' : null)
+                                        a(href='?page=' + (p === '...' ? (i ? posts.totalPages : 1) : p ))= p
+                                if posts.next
+                                    li: a(href='?page=' + posts.next): span.glyphicon.glyphicon-chevron-right
+                                else
+                                    li.disabled: a(href='?page=' + posts.totalPages): span.glyphicon.glyphicon-chevron-right
+                    else
+                        if category
+                            .jumbotron.text-center
+                                h3(style="margin-bottom:0;margin-top:0;") No posts in the category #{category.name}.
+                        else
+                            .jumbotron.text-center
+                                h3(style="margin-bottom:0;margin-top:0;") There are no posts yet.
+                    //#properties_widget-3.widget.widget_properties_widget
+                    //    .type-box.item-per-row-3
+                    //        .properties-row
+                    //            .property-container
+                    //                .property-box
+                    //                    .property-box-image
+                    //                        a.property-box-image-inner(href='http://preview.byaviators.com/theme/realia/properties/south-mervin-boulevard/')
+                    //                            img.attachment-property-box-thumbnail.wp-post-image(width='270', height='226', src='http://preview.byaviators.com/theme/realia/wp-content/uploads/2015/06/5388662544_96ca3f71c1_o-270x226.jpg', alt='interiors')
+                    //                            .property-box-image-price
+                    //                                | $ 220,000
+                    //                            // /.property-box-image-price
+                    //                            span.property-badge Featured / Reduced
+                    //                            span.property-badge.property-badge-sticky TOP
+                    //                    // /.property-image
+                    //                    .property-box-content
+                    //                        .property-box-title
+                    //                            h3
+                    //                                a(href='http://preview.byaviators.com/theme/realia/properties/south-mervin-boulevard/') South Mervin Boulevard
+                    //                        // /.property-box-title
+                    //                        .property-box-body
+                    //                            .property-box-type
+                    //                                | Villa
+                    //                            // /.property-box-type
+                    //                            .property-box-price
+                    //                                | $ 220,000
+                    //                            // /.property-box-price
+                    //                            .property-box-read-more
+                    //                                a(href='http://preview.byaviators.com/theme/realia/properties/south-mervin-boulevard/') Read More
+                    //                            // /.property-box-price
+                    //                            .property-box-meta
+                    //                                span.property-box-meta-item.property-box-meta-item-area
+                    //                                    i.pp.pp-normal-cursor-scale-up
+                    //                                    |  140 sqft
+                    //                                // /.property-box-meta-item
+                    //                                span.property-box-meta-item.property-box-meta-item-beds
+                    //                                    i.pp.pp-normal-bed
+                    //                                    |  3
+                    //                                // /.property-box-meta-item
+                    //                                span.property-box-meta-item.property-box-meta-item-baths
+                    //                                    i.pp.pp-normal-shower
+                    //                                    |  4
+                    //                                // /.property-box-meta-item
+                    //                            // /.property-box-meta
+                    //                        // /.property-box-body
+                    //                    // /.property-box-content
+                    //            // /.property-container
             #aviators_call_to_action-2.widget.widget_aviators_call_to_action
                 .fullwidth.background-secondary
                     .row

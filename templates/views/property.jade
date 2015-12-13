@@ -4,9 +4,9 @@ include ../mixins/post
 block content
 	.page-header
 		a(href='/keystone/posts?new').btn.btn-default.pull-right= user ? 'Write Post' : 'Sign in to Write Post'
-		h1=category ? category.name : 'List Properties'
+		h4=category ? category.name : 'List Properties'
 	.row
-		.col-sm-8
+		.col-sm-10
 			if filters.category && !category
 				h3 Invalid Category.
 			else
@@ -44,7 +44,7 @@ block content
 					else
 						.jumbotron.text-center
 							h3(style="margin-bottom:0;margin-top:0;") There are no posts yet.
-		.col-sm-4
+		.col-sm-2
 			if categories.length
 				.lead.text-muted Categories
 				ul.nav.nav-pills.nav-stacked

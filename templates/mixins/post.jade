@@ -1,22 +1,65 @@
 mixin post(post)
-    article(data-ks-editable=editable(user, {list: 'Post', id: post.id})).media
-        .media-left
-            a(href='/property/post/' + post.key)
-                if post.image
-                    img(src=post.image[0].thumbnail(200, 200, "scale")).media-object
-                else
-                    img(src="http://placehold.it/80x80").media-object
+    article(data-ks-editable=editable(user, {list: 'Post', id: post.id})).col-sm-4
+        //.media-left
+        //    a(href='/property/post/' + post.key)
+        //        if post.image
+        //            img(src=post.image[0].thumbnail(200, 200, "scale")).media-object
+        //        else
+        //            img(src="http://placehold.it/80x80").media-object
+        //
+        //.media-body
+        //    h3.media-heading
+        //        a(href='/property/post/' + post.key)= post.name
+        //    if post.publishedDate || post.author
+        //        p.text-muted.text-small
+        //            if post.publishedDate
+        //                time= post._.publishedDate.format('MMMM Do, YYYY')
+        //                | |
+        //            if post.author
+        //                span by #{post.author.name.full}
+        //    != post.content.brief
+        .property-container
+            .property-box
+                .property-box-image
+                    a.property-box-image-inner(href='/property/post/' + post.key)
+                        if post.image[0]
+                            img.attachment-property-box-thumbnail.wp-post-image(width='270', height='226', src=post.image[0].thumbnail(270, 226, "scale"), alt='interiors')
+                        else
+                            img(src="http://placehold.it/270x226").attachment-property-box-thumbnail.wp-post-image
+                        .property-box-image-price #{post.price} vnđ
+                        // /.property-box-image-price
+                // /.property-image
+                .property-box-content
+                    .property-box-title
+                        h3
+                            a(href='/property/post/' + post.key)=post.name
+                    // /.property-box-title
+                    .property-box-body
+                        .property-box-type
+                        // /.property-box-type
+                        .property-box-price $ 220,000
+                        // /.property-box-price
+                        .property-box-read-more
+                            a(href='http://preview.byaviators.com/theme/realia/properties/south-mervin-boulevard/') Read More
+                        // /.property-box-price
+                        .property-box-meta
+                            span.property-box-meta-item.property-box-meta-item-area
+                                i.fa.fa-home
+                                if post.area
+                                    | #{post.area} m²
+                                else
+                                    |  chưa rõ
 
-        .media-body
-            h3.media-heading
-                a(href='/property/post/' + post.key)= post.name
-            if post.publishedDate || post.author
-                p.text-muted.text-small
-                    if post.publishedDate
-                        time= post._.publishedDate.format('MMMM Do, YYYY')
-                        | |
-                    if post.author
-                        span by #{post.author.name.full}
-            != post.content.brief
+                            // /.property-box-meta-item
+                            span.property-box-meta-item.property-box-meta-item-beds
+                                i.fa.fa-bed
+                                if post.room
+                                    | #{post.room} phòng
+                                else
+                                    |  chưa rõ
+                            // /.property-box-meta-item
+                        // /.property-box-meta
+                    // /.property-box-body
+                // /.property-box-content
         script.
             var x = '#{post._.images}'
