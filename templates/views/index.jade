@@ -242,6 +242,7 @@ block content
         var posts =!{JSON.stringify(posts)};
         posts=posts.map(function(value){
             var temp= {};
+            temp.name = value.name
             temp.lat = value.lat;
             temp.long = value.long;
             temp.id = value.key;
@@ -256,25 +257,26 @@ block content
             return temp;
         })
         console.log(posts);
-        function Marker(lat, lng, post){
-            this.lat = lat;
-            this.lng = lng;
-            this.post = post || {//Demo
-                id: 1,
-                name: 'Chung cư 173 Xuân Thủy',
-                type: Math.random() * 2 < 1 ? 'condo' : 'family-house',
-                image: 'http://preview.byaviators.com/drupal/realia/sites/default/files/styles/thumbnail/public/14_5.jpg?itok=ZoE8CZZz',
-                area: 200,
-                price: 1000000
-            };
-        }
+        //- function Marker(lat, lng, post){
+        //-     this.lat = lat;
+        //-     this.lng = lng;
+        //-     this.post = post || {//Demo
+        //-         id: 1,
+        //-         name: 'Chung cư 173 Xuân Thủy',
+        //-         type: Math.random() * 2 < 1 ? 'condo' : 'family-house',
+        //-         image: 'http://preview.byaviators.com/drupal/realia/sites/default/files/styles/thumbnail/public/14_5.jpg?itok=ZoE8CZZz',
+        //-         area: 200,
+        //-         price: 1000000
+        //-     };
+        //- }
 
         google.maps.event.addDomListener(window, 'load', function(){
             initMap();
-            posts.forEach(function(value){
-                addMarkersToMap([new Marker(value.lat, value.long, value)]);
-            })
-            //Demo, load by AJAX later
+            addMarkersToMap(posts);
+
+            //- posts.forEach(function(value){
+            //-     addMarkersToMap([new Marker(value.lat, value.long, value)]);
+            //- })
         });
 
         function initMap(){
@@ -295,14 +297,13 @@ block content
             }
         }
 
-        function addMarkersToMap(markers){
+        function addMarkersToMap(posts){
 
             var markerList = [];
 
-            $.each(markers, function(i, markerData){
+            $.each(posts, function(i, post){
 
-                var post = markerData.post;
-                var position = new google.maps.LatLng(markerData.lat, markerData.lng);
+                var position = new google.maps.LatLng(post.lat, post.long);
 
                 // creating Google Maps Marker
                 var marker = new google.maps.Marker({
