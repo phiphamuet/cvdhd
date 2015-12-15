@@ -17,8 +17,8 @@ Post.add({
     area: {type: Number},
     location: {type: String},
     unit: {type: String},
-    lat: {type: Number},
-    long: {type: Number},
+    lat: {type: Number, required: true, default: 21.0290715},
+    long: {type: Number, required: true, default: 105.78},
     content: {
         brief: {type: Types.Html, wysiwyg: true, height: 150},
         extended: {type: Types.Html, wysiwyg: true, height: 400},

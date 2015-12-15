@@ -242,6 +242,7 @@ block content
         var posts =!{JSON.stringify(posts)};
         posts=posts.map(function(value){
             var temp= {};
+            temp.name = value.name;
             temp.lat = value.lat;
             temp.long = value.long;
             temp.id = value.key;
@@ -249,7 +250,7 @@ block content
             temp.area = value.area;
             temp.price = value.price;
             if(value.image.length ==0){
-                temp.image = 'http://preview.byaviators.com/drupal/realia/sites/default/files/styles/thumbnail/public/14_5.jpg?itok=ZoE8CZZz'
+                temp.image = 'http://placehold.it/750x380'
             } else {
                 temp.image = value.image[0].url;
             }
@@ -315,11 +316,9 @@ block content
                 // infobox
                 var box = $('.template .infobox').clone();
                 box.children('.views-field-field-image').find('img').attr('src', post.image);
-                box.children('.views-field-title').find('a').attr('href', '/property/post/'+post.id)
-                    .html(post.name);
-                box.children('.views-field-field-area').find('.field-content').html(post.area + "m<sup>2</sup>");
-                box.children('.views-field-field-price').find('.field-content')
-                    .html(post.price.toLocaleString() + " đồng");
+                box.children('.views-field-title').find('a').attr('href', '/property/post/'+post.id).html(post.name);
+                if(post.area) box.children('.views-field-field-area').find('.field-content').html(post.area + "m<sup>2</sup>");
+                if(post.price) box.children('.views-field-field-price').find('.field-content').html(post.price.toLocaleString() + " đồng");
                 box.children('.views-field-view-node').find('a').attr('href', '/property/post/'+post.id);
 
                 // storing content infobox inside google marker
