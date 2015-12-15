@@ -94,6 +94,15 @@ block content
                                 | by #{post.author.name.full}
                     hr
                     != post.content.full
+
+                //Contact
+                .panel.panel-success
+                    .panel-heading Liên hệ
+                    .panel-body
+                        |Email: #{post.author.email}
+                        br
+                        |Điện thoại: #{post.author.phone}
+
                 //-comments
                 div
                     +comment-form()
@@ -125,6 +134,23 @@ block content
                                         | Chưa rõ diện tích
                                     else
                                         | #{post.area} mét vuông
+                        tr
+                            td.col-md-6 Địa chỉ
+                                td.col-md-6
+                                    if !post.location
+                                        | Chưa rõ địa chỉ
+                                    else
+                                        | #{post.location} &nbsp;
+                                        a(href="#locationModal" data-toggle="modal") (Xem)
+        
+        #locationModal.modal.fade(role="dialog")
+            .modal-dialog.modal-lg
+                .modal-content
+                    .modal-header
+                        button.close(type="button" data-dismiss="modal") &times;
+                    .modal-body
+                        #locationMap(style="height:480px")
+                </div>
 
     script(src='//cdnjs.cloudflare.com/ajax/libs/three.js/r69/three.min.js')
     script.
@@ -256,5 +282,29 @@ block page-js
                 } else {
                     submit.attr('disabled', 'disabled');
                 }
+            });
+        });
+    script(src='/js/lib/bootstrap/modal.js')
+    script.
+        $('#locationModal').on('shown.bs.modal', function(){
+            if ($(this).data('attached_map'))
+                return;
+            $(this).data('attached_map', true);
+
+            var position = {
+                lat: post.lat,
+                lng: post.long
+            };
+
+            var gmap = new google.maps.Map(document.getElementById('locationMap'), {
+                center: position,
+                zoom: 14,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            });
+
+            var marker = new google.maps.Marker({
+                position: position,
+                map: gmap,
+                title: post.location
             });
         });
