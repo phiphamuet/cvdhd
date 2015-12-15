@@ -23,7 +23,6 @@ exports = module.exports = function (req, res) {
 		}).populate('author categories');
 
 		q.exec(function (err, result) {
-			console.log(result);
 			locals.post = result;
 			next(err);
 		});
@@ -36,7 +35,6 @@ exports = module.exports = function (req, res) {
 		var q = Post.model.find().where('state', 'published').sort('-publishedDate').populate('author').limit('4');
 
 		q.exec(function (err, results) {
-			console.log(results);
 			locals.posts = results;
 			next(err);
 		});

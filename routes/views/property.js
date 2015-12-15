@@ -55,6 +55,7 @@ exports = module.exports = function (req, res) {
 		}
 	});
 
+
 	// Load the posts
 	view.on('init', function (next) {
 
@@ -70,6 +71,18 @@ exports = module.exports = function (req, res) {
 		if (locals.category) {
 			q.where('categories').in([locals.category]);
 		}
+		if (req.query.filter){
+			if(req.query.location) {
+				var locationFilter = new RegExp(req.query.location, 'gi');
+				q.where('location', locationFilter);
+			}
+			if(req.query['filter-price-from']){
+				q.where('price').gte(req.query['filter-price-from']);
+			}
+			if(req.query['filter-price-to']){
+				q.where('price').lte(req.query['filter-price-to']);
+			}
+		}
 
 		q.exec(function (err, results) {
 			locals.posts = results;
@@ -77,6 +90,7 @@ exports = module.exports = function (req, res) {
 		});
 
 	});
+	//viet.on('get')
 
 	// Render the vogiew
 	view.render('property');

@@ -52,24 +52,24 @@ block content
                                 a(href='#filter_rent_sale_widget-2-rent') Search
                         .tabs-content
                             #filter_rent_sale_widget-2-rent.tab-content.rent-tab.active
-                                form(method='get', action='filter/properties')
-                                    input(type='hidden', name='filter-contract', value='RENT')
+                                form(method='get', action='property')
+                                    input(type='hidden', name='filter', value='true')
                                     .form-group
-                                        select#rent_filter_rent_sale_widget-2_location.form-control(name='filter-location')
+                                        select#rent_filter_rent_sale_widget-2_location.form-control(name='location')
                                             option(value='')
                                                 | Location
                                     // /.form-group
-                                    .form-group
-                                        select#rent_filter_rent_sale_widget-2_property_type.form-control(name='filter-property-type')
-                                            option(value='')
-                                                | Property type
+                                    //.form-group
+                                    //    select#rent_filter_rent_sale_widget-2_property_type.form-control(name='filter-property-type')
+                                    //        option(value='')
+                                    //            | Property type
 
                                     // /.form-group
                                     .form-group
-                                        input#rent_filter_rent_sale_widget-2_price_from.form-control(type='text', name='filter-price-from', placeholder='Price from', value='')
+                                        input#rent_filter_rent_sale_widget-2_price_from.form-control(type='text', name='filter-price-from', placeholder='Price from')
                                     // /.form-group
                                     .form-group
-                                        input#rent_filter_rent_sale_widget-2_price_to.form-control(type='text', name='filter-price-to', placeholder='Price to', value='')
+                                        input#rent_filter_rent_sale_widget-2_price_to.form-control(type='text', name='filter-price-to', placeholder='Price to')
                                     // /.form-group
                                     .form-group
                                         button.button Filter
@@ -277,6 +277,13 @@ block content
             //- posts.forEach(function(value){
             //-     addMarkersToMap([new Marker(value.lat, value.long, value)]);
             //- })
+        });
+
+        jQuery.getJSON('/gisVN.json', function(data){
+            console.log(data);
+            for (dataInfo in data){
+                jQuery("#rent_filter_rent_sale_widget-2_location").append("<option value='"+data[dataInfo].name.replace("Tỉnh ","").replace("Thành phố ","")+"'>"+data[dataInfo].name+"</option>");
+            }
         });
 
         function initMap(){

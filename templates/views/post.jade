@@ -119,7 +119,7 @@ block content
                                 if !post.price
                                     | Chưa rõ
                                 else
-                                    | #{post.price} vnđ
+                                    | #{post.price.toLocaleString()} vnđ
                         tr
                             td.col-md-6 Số phòng
                                 td.col-md-6
@@ -141,7 +141,8 @@ block content
                                         | Chưa rõ địa chỉ
                                     else
                                         | #{post.location} &nbsp;
-                                        a(href="#locationModal" data-toggle="modal") (Xem)
+                                        if(post.lat)
+                                            a(href="#locationModal" data-toggle="modal") (Xem)
         
         #locationModal.modal.fade(role="dialog")
             .modal-dialog.modal-lg

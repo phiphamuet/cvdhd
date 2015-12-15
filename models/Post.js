@@ -12,7 +12,7 @@ Post.add({
     author: {type: Types.Relationship, ref: 'User', index: true},
     publishedDate: {type: Types.Date, index: true},
     image: {type: Types.CloudinaryImages},
-    price: {type: Number},
+    price: {type: Number, required: true, default: 0},
     room: {type: Number},
     area: {type: Number},
     location: {type: String},
